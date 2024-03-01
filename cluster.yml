@@ -1,6 +1,8 @@
 ---
 - name: Install Python packages
   hosts: localhost
+  become: yes
+  become_method: sudo
   tasks:
     - name: Ensure Python packages are installed
       pip:
