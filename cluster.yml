@@ -1,7 +1,7 @@
 ---
 
 - name: Install Kubernetes
-  hosts: localhost
+  hosts: k8s_cluster
   gather_facts: no
   become: yes
   tasks:
