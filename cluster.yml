@@ -3,6 +3,14 @@
   hosts: localhost
   gather_facts: no
   tasks:
+    - name: Check if Python 3 is installed
+      command: python3 --version
+      ignore_errors: true
+      register: python_check
+
+    - name: Install Python 3 if not present
+      raw: sudo apt-get update && sudo apt-get install -y python3
+      when: python_check.rc != 0
     - name: Create virtual environment
       command: python3 -m venv kubespray-venv
 
