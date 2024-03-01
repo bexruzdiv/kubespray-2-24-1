@@ -3,6 +3,12 @@
   hosts: all
   gather_facts: no
   tasks:
+    - name: Install python3-venv package
+      become: yes
+      package:
+        name: python3-venv
+        state: present
+
     - name: Create virtual environment
       command: python3 -m venv kubespray-venv
 
@@ -13,6 +19,7 @@
       pip:
         requirements: requirements.txt
         state: latest
+
 
 - name: Install Kubernetes
   ansible.builtin.import_playbook: playbooks/cluster.yml
