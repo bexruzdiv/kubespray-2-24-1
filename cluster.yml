@@ -1,3 +1,11 @@
+- name: Install package using pip on localhost
+  hosts: localhost
+  tasks:
+    - name: Install package using pip
+      ansible.builtin.pip:
+        name: requirements.txt
+        state: present
+
 
 - name: Install Kubernetes
   ansible.builtin.import_playbook: playbooks/cluster.yml
