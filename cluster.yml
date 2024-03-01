@@ -5,14 +5,10 @@
   gather_facts: no
   become: yes
   tasks:
-    - name: Check if Python 3 is installed
-      command: python3 --version
-      ignore_errors: true
-      register: python_check
 
     - name: Install Python 3 if not present
-      raw: apt-get update && apt-get install -y python3
-      when: python_check.rc != 0
+      command: apt-get update && apt-get install -y python3
+
 
     - name: Create virtual environment
       command: python3 -m venv kubespray-venv
