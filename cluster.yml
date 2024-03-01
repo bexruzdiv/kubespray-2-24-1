@@ -1,15 +1,3 @@
 ---
-- name: Install Python packages
-  hosts: localhost
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Ensure Python packages are installed
-      pip:
-        requirements: requirements.txt
-        executable: pip3
-        state: latest
-      become: yes
-
 - name: Install Kubernetes
   ansible.builtin.import_playbook: playbooks/cluster.yml
