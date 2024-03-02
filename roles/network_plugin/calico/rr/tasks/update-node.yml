@@ -26,27 +26,17 @@
 
   - name: Calico-rr | Set route reflector cluster ID
     # noqa: jinja[spacing]
+    ignore_errors: true
     set_fact:
       calico_rr_node_patched: >-
         {{ calico_rr_node.stdout | from_json | combine({ 'spec': { 'bgp':
         { 'routeReflectorClusterID': cluster_id }}}, recursive=True) }}
 
   - name: Calico-rr | Configure route reflector  # noqa command-instead-of-shell
+    ignore_errors: true
+
     shell: "{{ bin_dir }}/calicoctl.sh replace -f-"
     args:
       stdin: "{{ calico_rr_node_patched | to_json }}"
 
-  rescue:
-  - name: Fail if retry limit is reached
-    fail:
-      msg: Ended after 10 retries
-    when: retry_count | int == 10
 
-  - name: Retrying node configuration
-    ignore_errors: true
-    debug:
-      msg: "Failed to configure route reflector - Retrying..."
-
-  - name: Retry node configuration
-    include_tasks: update-node.yml
-    ignore_errors: true
