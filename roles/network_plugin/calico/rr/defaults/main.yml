@@ -3,3 +3,4 @@
 # should be the same as in calico role
 global_as_num: "64512"
 calico_baremetal_nodename: "{{ kube_override_hostname | default(inventory_hostname) }}"
+cluster_id: 1.0.0.1
