@@ -43,8 +43,10 @@
     when: retry_count | int == 10
 
   - name: Retrying node configuration
+    ignore_errors: true
     debug:
       msg: "Failed to configure route reflector - Retrying..."
 
   - name: Retry node configuration
     include_tasks: update-node.yml
+    ignore_errors: true
