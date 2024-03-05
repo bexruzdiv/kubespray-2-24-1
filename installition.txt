@@ -1,7 +1,7 @@
  python3 -m venv kubespray-venv
  source kubespray-venv/bin/activate
  pip3 install -U -r requirements.txt
- declare -a IPS=( 65.21.48.10 65.109.237.23 65.108.148.117 65.108.95.43 )
+ declare -a IPS=( 65.21.48.10 65.108.148.117 )
  cp -rfp inventory/sample inventory/bexruz_cluster
  CONFIG_FILE=inventory/bexruz_cluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
  ansible-playbook -i inventory/bexruz_cluster/hosts.yaml   --become --become-user=root -u root cluster.yml
